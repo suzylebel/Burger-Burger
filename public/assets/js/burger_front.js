@@ -1,3 +1,4 @@
+// logic for moving around state of burger or eaten/
 $(function () {
     $(".change-devoured").on("click", function (event) {
 
