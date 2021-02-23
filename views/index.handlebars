@@ -1,8 +1,39 @@
+<h3>Can I take your order?</h3>
+
+<img src="/assets/img/burger.gif">
+
+<div class="container col">
+
+<h3>Burgers to Eat!</h3>
 
 <ul>
-  {{#each burgers}}
-    <li>
-      <p>Burger: {{burger_name}}</p>
-    </li>
-  {{/each}}
+    {{#each burger}}
+    {{#unless devoured}}
+    {{> burgers/burger-block devoured=true}}
+    {{/unless}}
+    {{/each}}
 </ul>
+
+<h3>Delicious Burgers that have been eaten!</h3>
+
+<ul>
+    {{#each burger}}
+    {{#if devoured}}
+    {{> burgers/burger-block devoured=false}}
+    {{/if}}
+    {{/each}}
+</ul>
+
+<h2>Add a Burger</h2>
+<form class="create-form">
+
+    <div class="form-group">
+        <label for="burger_name">Burger Name:</label>
+        <input type="text" id="burger_name" name="burger_name">
+    </div>
+
+    <button type="submit">Add Burger</button>
+</form>
+</div>
+
+<img src="/assets/img/kingburger.png">

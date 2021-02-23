@@ -1,27 +1,22 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
-var mysql = require("mysql");
 var app = express();
+var routes = require("./controllers/burgers_controller");
 
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8000;
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+app.use(express.static("public"));
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()); 
 
 
-app.get("/", function(req, res) {
-    connection.query("SELECT * FROM Burgers;", function(err, data) {
-      if (err) throw err;
-      res.render("index", { Burgers: data });
-    });
-  });
 
-  app.post("/", function(req, res) {
-    connection.query("INSERT INTO Burgers (burger_name) VALUES (?)", [req.body.burger_name], function(err, result) {
-      if (err) throw err;
-      res.redirect("/");
-    });
-  });
+// variable for routes from above
+app.use(routes);
+
 
 
 app.listen(PORT, function() {
